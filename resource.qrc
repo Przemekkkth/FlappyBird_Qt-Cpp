@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/sprite/base.png</file>
+        <file>res/sprite/gameover.png</file>
+        <file>res/sprite/bird.png</file>
+        <file>res/sprite/message.png</file>
+        <file>res/sprite/pipe-red.png</file>
+        <file>res/sprite/background-day.png</file>
+        <file>res/sfx/sfx_wing.wav</file>
+        <file>res/sfx/sfx_hit.wav</file>
+        <file>res/sfx/sfx_die.wav</file>
+        <file>res/sfx/sfx_point.wav</file>
+        <file>res/sfx/sfx_swooshing.wav</file>
+        <file>res/font/04B_19.ttf</file>
+    </qresource>
+</RCC>
