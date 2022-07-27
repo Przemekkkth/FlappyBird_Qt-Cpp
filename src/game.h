@@ -16,7 +16,7 @@ public:
     static const QString PATH_TO_BASE_PIXMAP;
     static const QString PATH_TO_BIRD_PIXMAP;
 
-    static constexpr int FPS = 30;
+    static constexpr int FPS = 60;
 };
 
 #endif // GAME_H

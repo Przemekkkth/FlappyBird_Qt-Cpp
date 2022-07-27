@@ -28,15 +28,7 @@ void GameScene::loop()
         m_loopTime -= m_loopSpeed;
         if(Game::GAME_ACTIVE)
         {
-            m_birdMovement += Game::GRAVITY*m_deltaTime;
-            if(m_bird->y() > Game::RESOLUTION.height())
-            {
-                m_bird->setY( 0);
-                m_birdMovement = 0;
-            }
-
-            m_bird->setY( m_bird->y() + Game::GRAVITY/8);
-            //qDebug() << m_bird->y();
+            m_bird->updateBird();
         }
     }
     else
@@ -78,7 +70,7 @@ void GameScene::init()
     addItem(m_basePixmapItem);
 
     m_bird = new Bird();
-    m_bird->setPos(Game::RESOLUTION.width()/2, Game::RESOLUTION.height()/2);
+    m_bird->setPos(m_bird->startPosition());
     m_bird->setFlag(QGraphicsItem::ItemIsFocusable);
     m_bird->setFocus();
     addItem(m_bird);
