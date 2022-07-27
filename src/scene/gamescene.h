@@ -6,7 +6,7 @@
 #include <QElapsedTimer>
 #include <QGraphicsPixmapItem>
 
-#include "game.h"
+#include "../game.h"
 class Bird;
 class GameScene : public QGraphicsScene
 {
@@ -27,6 +27,7 @@ private:
     QPixmap m_bgPixmap, m_basePixmap;
     //Scene
     void init();
+
     QGraphicsPixmapItem *m_bgPixmapItem, *m_basePixmapItem;
     Bird* m_bird;
     float m_birdMovement;
@@ -35,6 +36,9 @@ private:
     //Pillar
     QTimer m_pillarTimer;
     // QGraphicsScene interface
+private slots:
+    void activeGameOver();
+    void spawnPillar();
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
 };

@@ -2,6 +2,7 @@
 #include <QRandomGenerator>
 #include <QGraphicsScene>
 #include "../game.h"
+#include "bird.h"
 
 Pillar::Pillar()
     : m_topPillar(new QGraphicsPixmapItem(Game::PATH_TO_PILLAR_PIXMAP)),
@@ -52,6 +53,29 @@ qreal Pillar::x() const
 void Pillar::setX(qreal x)
 {
     m_x = x;
-
     setPos(QPointF(0,0) + QPointF(x, m_yPos));
+    if(x < 0 && !m_pastBird)
+    {
+        m_pastBird = true;
+        emit scoreChanged();
+    }
+
+    if(collidesWithBird())
+    {
+        emit collidedWithBird();
+    }
+}
+
+bool Pillar::collidesWithBird()
+{
+    QList<QGraphicsItem*> collidingItems = m_topPillar->collidingItems();
+    collidingItems.append(m_bottomPillar->collidingItems());
+
+    foreach (QGraphicsItem * item, collidingItems) {
+        Bird * birdItem = dynamic_cast<Bird*>(item);
+        if(birdItem){
+            return true;
+        }
+    }
+    return false;
 }

@@ -23,7 +23,7 @@ public slots:
     void setRotation(qreal rotation);
     void setY(qreal y);
 signals:
-
+    void collidedWithGround();
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
 
@@ -44,6 +44,7 @@ private:
 
     qreal m_rotation, m_y;
     QPropertyAnimation *m_yAnimation, *m_rotationAnimation;
+    void checkCollideWithGround();
 };
 
 #endif // BIRD_H

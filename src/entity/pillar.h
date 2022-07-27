@@ -16,16 +16,19 @@ public:
 
     qreal x() const;
 signals:
-    void collideWithBird();
+    void collidedWithBird();
+    void scoreChanged();
 public slots:
     void setX(qreal x);
 private:
+    bool collidesWithBird();
     QPropertyAnimation *m_xAnimation;
     QGraphicsPixmapItem *m_topPillar, *m_bottomPillar;
     int m_yPos;
     qreal m_x;
     bool m_pastBird;
     const int MARGINAL_VALUE;
+
 };
 
 #endif // PILLAR_H

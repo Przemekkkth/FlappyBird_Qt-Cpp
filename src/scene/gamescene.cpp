@@ -1,8 +1,8 @@
 #include "gamescene.h"
 #include <QDebug>
 #include <QKeyEvent>
-#include "entity/bird.h"
-#include "entity/pillar.h"
+#include "../entity/bird.h"
+#include "../entity/pillar.h"
 
 GameScene::GameScene(QObject *parent)
     : QGraphicsScene{parent}, m_deltaTime(0.0f), m_loopTime(0.0f)
@@ -17,11 +17,7 @@ GameScene::GameScene(QObject *parent)
     init();
 
 
-    connect(&m_pillarTimer, &QTimer::timeout, [this](){
-        Pillar * pillarItem = new Pillar();
-        addItem(pillarItem);
-    });
-    m_pillarTimer.start(1000);
+    connect(&m_pillarTimer, &QTimer::timeout, this, &GameScene::spawnPillar);
 }
 
 
@@ -62,16 +58,32 @@ void GameScene::init()
     m_bird->setPos(m_bird->startPosition());
     m_bird->setFlag(QGraphicsItem::ItemIsFocusable);
     m_bird->setFocus();
+    connect(m_bird, &Bird::collidedWithGround, this, &GameScene::activeGameOver);
     addItem(m_bird);
+
+    m_pillarTimer.start(1000);
+
+}
+
+void GameScene::activeGameOver()
+{
+    clear();
+    m_pillarTimer.stop();
+}
+
+void GameScene::spawnPillar()
+{
+    Pillar * pillarItem = new Pillar();
+    connect(pillarItem, &Pillar::collidedWithBird, this, &GameScene::activeGameOver);
+    addItem(pillarItem);
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)
 {
 
     switch (event->key()) {
-        case Qt::Key_W:
-//            m_bird->jump();
-//            m_bird->setY(m_bird->y() + 1);
+        case Qt::Key_L:
+            init();
         break;
     }
     qDebug() << "GameScene::keyPressEvent(QKeyEvent *event)";

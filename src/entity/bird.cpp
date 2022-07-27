@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QKeyEvent>
 #include <QGraphicsScene>
+#include "pillar.h"
 
 Bird::Bird(QString pathToPixmap)
     : m_pixmapSize(QSize(34, 24)), m_startPos(QPoint(5, 256)), m_index(0), m_loopTime(120)
@@ -116,18 +117,24 @@ void Bird::setRotation(qreal rotation)
     setTransform(t);
 }
 
-void Bird::setY(qreal y)
+void Bird::checkCollideWithGround()
 {
-    moveBy(0,y-m_y);
-    m_y = y;
     QList<QGraphicsItem*> collidedWithBird = collidingItems();
     foreach(QGraphicsItem* item, collidedWithBird)
     {
         if(item->data(QGraphicsItem::UserType+1).toString() == "Floor" )
         {
             qDebug() << "Floor";
+            emit collidedWithGround();
         }
     }
+}
+
+void Bird::setY(qreal y)
+{
+    moveBy(0,y-m_y);
+    m_y = y;
+    checkCollideWithGround();
 }
 
 
