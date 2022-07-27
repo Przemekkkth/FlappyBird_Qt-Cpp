@@ -16,8 +16,6 @@ public:
 
 signals:
 
-private slots:
-    void loop();
 private:
     //FPS
     float m_deltaTime, m_loopTime;

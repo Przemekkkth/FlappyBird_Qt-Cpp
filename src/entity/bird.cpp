@@ -1,10 +1,10 @@
 #include "bird.h"
 #include <QDebug>
 #include <QKeyEvent>
+#include <QGraphicsScene>
 
 Bird::Bird(QString pathToPixmap)
-    : m_pixmapSize(QSize(34, 24)), m_startPos(QPoint(50, 256)), m_index(0), m_loopTime(120), m_isJump(false)
-    , m_strongOfJump(4)
+    : m_pixmapSize(QSize(34, 24)), m_startPos(QPoint(50, 0)), m_index(0), m_loopTime(120)
 {
     if(m_birdPixmap.load(pathToPixmap))
     {
@@ -19,6 +19,15 @@ Bird::Bird(QString pathToPixmap)
 
     m_timer.start(m_loopTime);
     setPixmap(m_birdPixmap.copy(m_index*m_pixmapSize.width(), 0, m_pixmapSize.width(), m_pixmapSize.height()));
+
+    m_yAnimation = new QPropertyAnimation(this,"y",this);
+    m_yAnimation->setStartValue(scenePos().y());
+    m_yAnimation->setEndValue(Game::RESOLUTION.height()/2);
+    m_yAnimation->setEasingCurve(QEasingCurve::InQuad);
+    m_yAnimation->setDuration(5000);
+    m_yAnimation->start();
+
+    m_rotationAnimation = new QPropertyAnimation(this,"rotation",this);
 }
 
 const QPoint Bird::startPosition() const
@@ -40,42 +49,92 @@ void Bird::loop()
     setPixmap(m_birdPixmap.copy(m_index*m_pixmapSize.width(), 0, m_pixmapSize.width(), m_pixmapSize.height()));
 }
 
+void Bird::rotateTo(const qreal &end, const int &duration, const QEasingCurve &curve)
+{
+    m_rotationAnimation->setStartValue(rotation());
+    m_rotationAnimation->setEndValue(end);
+    m_rotationAnimation->setEasingCurve(curve);
+    m_rotationAnimation->setDuration(duration);
+
+    m_rotationAnimation->start();
+}
+
 void Bird::fall()
 {
-    qDebug() << "fall y " << y();
-    if(y() > Game::RESOLUTION.height())
-    {
-        setY( 0);
-    }
-    setY( y() + Game::GRAVITY/8);
+    m_rotationAnimation->stop();
+
+    m_yAnimation->setStartValue(y());
+    m_yAnimation->setEasingCurve(QEasingCurve::InQuad);
+    m_yAnimation->setEndValue(scene()->sceneRect().height());
+    m_yAnimation->setDuration(1200);
+    m_yAnimation->start();
+
+    rotateTo(90,1100,QEasingCurve::InCubic);
 }
 
 void Bird::jump()
 {
-    qDebug() << "jump y " << y();
-    if(y() < 0)
+    m_yAnimation->stop();
+
+
+    qreal curPosY = y();
+
+    m_yAnimation->setStartValue(curPosY);
+    m_yAnimation->setEndValue(curPosY - scene()->sceneRect().height()/8);
+    m_yAnimation->setEasingCurve(QEasingCurve::OutQuad);
+    m_yAnimation->setDuration(285);
+
+    connect(m_yAnimation,&QPropertyAnimation::finished,[=](){
+       fall();
+    });
+
+
+    m_yAnimation->start();
+    rotateTo(-20,200,QEasingCurve::OutCubic);
+}
+
+qreal Bird::rotation() const
+{
+    return m_rotation;
+}
+
+qreal Bird::y() const
+{
+    return m_y;
+}
+
+void Bird::setRotation(qreal rotation)
+{
+    m_rotation = rotation;
+
+    QPointF c = boundingRect().center();
+
+    QTransform t;
+    t.translate(c.x(), c.y());
+    t.rotate(rotation);
+    t.translate(-c.x(), -c.y());
+    setTransform(t);
+}
+
+void Bird::setY(qreal y)
+{
+    moveBy(0,y-m_y);
+    m_y = y;
+    qDebug() << "m_y" << m_y;
+    QList<QGraphicsItem*> collidedWithBird = collidingItems();
+    foreach(QGraphicsItem* item, collidedWithBird)
     {
-        setY( Game::RESOLUTION.height());
+        if(item->data(QGraphicsItem::UserType+1).toString() == "Floor" )
+        {
+            qDebug() << "Floor";
+            exit(0);
+        }
     }
-    setY( y() - Game::GRAVITY/8 * m_strongOfJump);
-//    m_strongOfJump--;
-//    if(m_strongOfJump == 0)
-//    {
-//        m_strongOfJump = 4;
-//        m_isJump = false;
-//    }
 }
 
 void Bird::updateBird()
 {
-    if(m_isJump)
-    {
-        jump();
-    }
-    else
-    {
-        fall();
-    }
+
 }
 
 void Bird::keyPressEvent(QKeyEvent *event)
@@ -86,10 +145,10 @@ void Bird::keyPressEvent(QKeyEvent *event)
 //    }
     switch (event->key()) {
         case Qt::Key_W:
-            m_isJump = true;
+            jump();
             return;
         case Qt::Key_S:
-            m_isJump = false;
+            fall();
         return;
     }
     QGraphicsPixmapItem::keyPressEvent(event);

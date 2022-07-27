@@ -9,7 +9,6 @@ GameScene::GameScene(QObject *parent)
 {
     setSceneRect(0,0, Game::RESOLUTION.width(), Game::RESOLUTION.height());
 
-    connect(&m_timer, &QTimer::timeout, this, &GameScene::loop);
     m_timer.start(int(m_loopSpeed));
     m_elapsedTimer.start();
 
@@ -17,25 +16,6 @@ GameScene::GameScene(QObject *parent)
     init();
 }
 
-void GameScene::loop()
-{
-    m_deltaTime = m_elapsedTimer.elapsed();
-    m_elapsedTimer.restart();
-
-    m_loopTime += m_deltaTime;
-    if( m_loopTime > m_loopSpeed)
-    {
-        m_loopTime -= m_loopSpeed;
-        if(Game::GAME_ACTIVE)
-        {
-            m_bird->updateBird();
-        }
-    }
-    else
-    {
-        qDebug() << m_loopSpeed << " " << m_loopTime;
-    }
-}
 
 void GameScene::loadPixmap()
 {
@@ -67,6 +47,7 @@ void GameScene::init()
 
     m_basePixmapItem = new QGraphicsPixmapItem(m_basePixmap);
     m_basePixmapItem->setPos(0, Game::RESOLUTION.height() - m_basePixmap.height());
+    m_basePixmapItem->setData(QGraphicsItem::UserType+1, "Floor");
     addItem(m_basePixmapItem);
 
     m_bird = new Bird();
@@ -78,9 +59,12 @@ void GameScene::init()
 
 void GameScene::keyPressEvent(QKeyEvent *event)
 {
-    switch(event->key())
-    {
 
+    switch (event->key()) {
+        case Qt::Key_W:
+//            m_bird->jump();
+//            m_bird->setY(m_bird->y() + 1);
+        break;
     }
     qDebug() << "GameScene::keyPressEvent(QKeyEvent *event)";
     QGraphicsScene::keyPressEvent(event);
