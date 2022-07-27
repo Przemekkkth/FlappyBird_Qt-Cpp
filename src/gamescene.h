@@ -7,7 +7,7 @@
 #include <QGraphicsPixmapItem>
 
 #include "game.h"
-
+class Bird;
 class GameScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -30,6 +30,10 @@ private:
     //Scene
     void init();
     QGraphicsPixmapItem *m_bgPixmapItem, *m_basePixmapItem;
+    Bird* m_bird;
+    float m_birdMovement;
+    float m_yPos;
+    bool m_dir;
 };
 
 #endif // GAMESCENE_H
