@@ -2,6 +2,8 @@
 #define GAME_H
 #include <QSize>
 #include <QString>
+#include <QPoint>
+
 class Game
 {
 public:
@@ -19,6 +21,8 @@ public:
 
     static constexpr int FPS = 60;
     static constexpr int GAP_SIZE = 100;
+    static constexpr QPoint RANGE_OF_Y_FOR_PILLARS = QPoint(-125, 25);
+    static constexpr int DURATION_OF_PILLAR_ANIMATION = 1500;
 };
 
 #endif // GAME_H

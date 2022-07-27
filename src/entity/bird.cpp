@@ -4,7 +4,7 @@
 #include <QGraphicsScene>
 
 Bird::Bird(QString pathToPixmap)
-    : m_pixmapSize(QSize(34, 24)), m_startPos(QPoint(50, 256)), m_index(0), m_loopTime(120)
+    : m_pixmapSize(QSize(34, 24)), m_startPos(QPoint(5, 256)), m_index(0), m_loopTime(120)
 {
     if(m_birdPixmap.load(pathToPixmap))
     {

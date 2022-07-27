@@ -25,6 +25,7 @@ private:
     int m_yPos;
     qreal m_x;
     bool m_pastBird;
+    const int MARGINAL_VALUE;
 };
 
 #endif // PILLAR_H
