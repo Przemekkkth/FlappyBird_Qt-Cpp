@@ -16,21 +16,25 @@ class Bird : public QObject, public QGraphicsPixmapItem
 public:
     explicit Bird(QString pathToPixmap = Game::PATH_TO_BIRD_PIXMAP);
     const QPoint startPosition() const;
-    void updateBird();
-    void jump();
 
     qreal rotation() const;
     qreal y() const;
 public slots:
     void setRotation(qreal rotation);
     void setY(qreal y);
-private slots:
-    void loop();
 signals:
 
+protected:
+    virtual void keyPressEvent(QKeyEvent *event) override;
+
+private slots:
+    void updatePixmap();
+
 private:
+    void jump();
     void rotateTo(const qreal& end, const int& duration, const QEasingCurve& curve);
     void fall();
+
     QTimer m_timer;
     QPixmap m_birdPixmap;
     const QSize m_pixmapSize;
@@ -40,9 +44,6 @@ private:
 
     qreal m_rotation, m_y;
     QPropertyAnimation *m_yAnimation, *m_rotationAnimation;
-    // QGraphicsItem interface
-protected:
-    virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // BIRD_H

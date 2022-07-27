@@ -14,7 +14,7 @@ Bird::Bird(QString pathToPixmap)
     {
         qDebug() << "Bird pixmap is NOT loaded successfully";
     }
-    connect(&m_timer, &QTimer::timeout, this, &Bird::loop);
+    connect(&m_timer, &QTimer::timeout, this, &Bird::updatePixmap);
     setTransformOriginPoint(m_pixmapSize.width()/2, m_pixmapSize.height()/2);
 
     m_timer.start(m_loopTime);
@@ -35,7 +35,7 @@ const QPoint Bird::startPosition() const
     return m_startPos;
 }
 
-void Bird::loop()
+void Bird::updatePixmap()
 {
     if(m_index < 2)
     {
@@ -127,15 +127,11 @@ void Bird::setY(qreal y)
         if(item->data(QGraphicsItem::UserType+1).toString() == "Floor" )
         {
             qDebug() << "Floor";
-            exit(0);
         }
     }
 }
 
-void Bird::updateBird()
-{
 
-}
 
 void Bird::keyPressEvent(QKeyEvent *event)
 {
