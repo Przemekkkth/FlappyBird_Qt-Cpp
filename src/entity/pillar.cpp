@@ -7,13 +7,16 @@ Pillar::Pillar()
       m_bottomPillar(new QGraphicsPixmapItem(Game::PATH_TO_PILLAR_PIXMAP)),
       m_pastBird(false)
 {
-    m_topPillar->setPos(QPointF(0,0) - QPointF(m_topPillar->boundingRect().width()/2, m_topPillar->boundingRect().height() + 60));
-    m_bottomPillar->setPos(QPointF(0,0) + QPointF(-m_bottomPillar->boundingRect().width()/2, m_topPillar->boundingRect().height() + 60));
+    m_topPillar->setPos(QPointF(0,0) - QPointF(m_topPillar->boundingRect().width()/2, Game::GAP_SIZE));
+    m_topPillar->setTransformOriginPoint(QPointF(m_topPillar->boundingRect().width()/2, m_topPillar->boundingRect().height()/2));
+    m_topPillar->setRotation(180);
+
+    m_bottomPillar->setPos(QPointF(0,0) + QPointF(-m_bottomPillar->boundingRect().width()/2, m_topPillar->boundingRect().height()));
 
     addToGroup(m_topPillar);
     addToGroup(m_bottomPillar);
 
-    m_yPos = QRandomGenerator::global()->bounded(150);
+    m_yPos = QRandomGenerator::global()->bounded(1);
     int xRandomizer = QRandomGenerator::global()->bounded(200);
 
     setPos(QPoint(0,0) + QPoint(260+xRandomizer, m_yPos));

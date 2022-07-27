@@ -18,6 +18,7 @@ public:
     static const QString PATH_TO_PILLAR_PIXMAP;
 
     static constexpr int FPS = 60;
+    static constexpr int GAP_SIZE = 100;
 };
 
 #endif // GAME_H
