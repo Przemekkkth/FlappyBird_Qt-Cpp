@@ -13,6 +13,10 @@ signals:
 
 private:
     GameScene* m_gameScene;
+
+    // QWidget interface
+protected:
+    virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // VIEW_H

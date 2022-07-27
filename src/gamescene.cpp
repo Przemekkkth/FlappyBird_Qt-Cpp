@@ -1,5 +1,6 @@
 #include "gamescene.h"
 #include <QDebug>
+#include <QKeyEvent>
 #include "entity/bird.h"
 
 GameScene::GameScene(QObject *parent)
@@ -78,5 +79,17 @@ void GameScene::init()
 
     m_bird = new Bird();
     m_bird->setPos(Game::RESOLUTION.width()/2, Game::RESOLUTION.height()/2);
+    m_bird->setFlag(QGraphicsItem::ItemIsFocusable);
+    m_bird->setFocus();
     addItem(m_bird);
+}
+
+void GameScene::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key())
+    {
+
+    }
+    qDebug() << "GameScene::keyPressEvent(QKeyEvent *event)";
+    QGraphicsScene::keyPressEvent(event);
 }

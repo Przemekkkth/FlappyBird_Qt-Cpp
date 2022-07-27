@@ -34,6 +34,10 @@ private:
     float m_birdMovement;
     float m_yPos;
     bool m_dir;
+
+    // QGraphicsScene interface
+protected:
+    virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // GAMESCENE_H
