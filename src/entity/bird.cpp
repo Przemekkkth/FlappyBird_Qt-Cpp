@@ -4,7 +4,7 @@
 #include <QGraphicsScene>
 
 Bird::Bird(QString pathToPixmap)
-    : m_pixmapSize(QSize(34, 24)), m_startPos(QPoint(50, 0)), m_index(0), m_loopTime(120)
+    : m_pixmapSize(QSize(34, 24)), m_startPos(QPoint(50, 256)), m_index(0), m_loopTime(120)
 {
     if(m_birdPixmap.load(pathToPixmap))
     {
@@ -22,9 +22,9 @@ Bird::Bird(QString pathToPixmap)
 
     m_yAnimation = new QPropertyAnimation(this,"y",this);
     m_yAnimation->setStartValue(scenePos().y());
-    m_yAnimation->setEndValue(Game::RESOLUTION.height()/2);
+    m_yAnimation->setEndValue(Game::RESOLUTION.height());
     m_yAnimation->setEasingCurve(QEasingCurve::InQuad);
-    m_yAnimation->setDuration(5000);
+    m_yAnimation->setDuration(2500);
     m_yAnimation->start();
 
     m_rotationAnimation = new QPropertyAnimation(this,"rotation",this);
@@ -69,7 +69,7 @@ void Bird::fall()
     m_yAnimation->setDuration(1200);
     m_yAnimation->start();
 
-    rotateTo(90,1100,QEasingCurve::InCubic);
+    rotateTo(90,750,QEasingCurve::InCubic);
 }
 
 void Bird::jump()
@@ -120,7 +120,6 @@ void Bird::setY(qreal y)
 {
     moveBy(0,y-m_y);
     m_y = y;
-    qDebug() << "m_y" << m_y;
     QList<QGraphicsItem*> collidedWithBird = collidingItems();
     foreach(QGraphicsItem* item, collidedWithBird)
     {
@@ -135,16 +134,15 @@ void Bird::setY(qreal y)
 
 void Bird::keyPressEvent(QKeyEvent *event)
 {
-//    if(event->isAutoRepeat())
-//    {
-//        return;
-//    }
+    if(event->isAutoRepeat())
+    {
+        return;
+    }
     switch (event->key()) {
-        case Qt::Key_W:
+        case Qt::Key_Space:
             jump();
             return;
-        case Qt::Key_S:
-            fall();
+
         return;
     }
     QGraphicsPixmapItem::keyPressEvent(event);
