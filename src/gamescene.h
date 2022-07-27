@@ -32,7 +32,8 @@ private:
     float m_birdMovement;
     float m_yPos;
     bool m_dir;
-
+    //Pillar
+    QTimer m_pillarTimer;
     // QGraphicsScene interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;

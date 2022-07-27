@@ -15,7 +15,7 @@ Bird::Bird(QString pathToPixmap)
         qDebug() << "Bird pixmap is NOT loaded successfully";
     }
     connect(&m_timer, &QTimer::timeout, this, &Bird::updatePixmap);
-    setTransformOriginPoint(m_pixmapSize.width()/2, m_pixmapSize.height()/2);
+    //setTransformOriginPoint(m_pixmapSize.width()/2, m_pixmapSize.height()/2);
 
     m_timer.start(m_loopTime);
     setPixmap(m_birdPixmap.copy(m_index*m_pixmapSize.width(), 0, m_pixmapSize.width(), m_pixmapSize.height()));

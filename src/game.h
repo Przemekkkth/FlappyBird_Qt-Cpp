@@ -15,6 +15,7 @@ public:
     static const QString PATH_TO_BG_PIXMAP;
     static const QString PATH_TO_BASE_PIXMAP;
     static const QString PATH_TO_BIRD_PIXMAP;
+    static const QString PATH_TO_PILLAR_PIXMAP;
 
     static constexpr int FPS = 60;
 };

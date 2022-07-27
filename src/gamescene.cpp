@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QKeyEvent>
 #include "entity/bird.h"
+#include "entity/pillar.h"
 
 GameScene::GameScene(QObject *parent)
     : QGraphicsScene{parent}, m_deltaTime(0.0f), m_loopTime(0.0f)
@@ -14,6 +15,13 @@ GameScene::GameScene(QObject *parent)
 
     loadPixmap();
     init();
+
+
+    connect(&m_pillarTimer, &QTimer::timeout, [this](){
+        Pillar * pillarItem = new Pillar();
+        addItem(pillarItem);
+    });
+    m_pillarTimer.start(1000);
 }
 
 
