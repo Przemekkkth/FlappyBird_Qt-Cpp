@@ -122,9 +122,8 @@ void Bird::checkCollideWithGround()
     QList<QGraphicsItem*> collidedWithBird = collidingItems();
     foreach(QGraphicsItem* item, collidedWithBird)
     {
-        if(item->data(QGraphicsItem::UserType+1).toString() == "Floor" )
+        if(item->data(QGraphicsItem::UserType+1).toString() == Game::FLOOR_ENTITY_TYPE )
         {
-            qDebug() << "Floor";
             emit collidedWithGround();
         }
     }

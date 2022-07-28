@@ -52,7 +52,7 @@ void GameScene::init()
 
     m_basePixmapItem = new QGraphicsPixmapItem(m_basePixmap);
     m_basePixmapItem->setPos(0, Game::RESOLUTION.height() - m_basePixmap.height());
-    m_basePixmapItem->setData(QGraphicsItem::UserType+1, "Floor");
+    m_basePixmapItem->setData(QGraphicsItem::UserType+1, Game::FLOOR_ENTITY_TYPE);
     addItem(m_basePixmapItem);
 
     m_bird = new Bird();

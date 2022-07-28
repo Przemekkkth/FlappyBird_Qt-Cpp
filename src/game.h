@@ -16,6 +16,8 @@ public:
     static unsigned int HIGH_SCORE;
     static constexpr QColor WHITE = QColor(255, 255, 255);
 
+    static const QString FLOOR_ENTITY_TYPE;
+
     static const QString PATH_TO_BG_PIXMAP;
     static const QString PATH_TO_BASE_PIXMAP;
     static const QString PATH_TO_BIRD_PIXMAP;
@@ -31,6 +33,7 @@ public:
     static constexpr int GAP_SIZE = 100;
     static constexpr QPoint RANGE_OF_Y_FOR_PILLARS = QPoint(-125, 25);
     static constexpr int DURATION_OF_PILLAR_ANIMATION = 1500;
+
 };
 
 #endif // GAME_H
