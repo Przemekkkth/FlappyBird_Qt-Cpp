@@ -36,10 +36,8 @@ public:
     static constexpr int DURATION_OF_PILLAR_ANIMATION = 1500;
 
     //Sounds
-    static const QUrl PATH_TO_DIE_SFX;
     static const QUrl PATH_TO_HIT_SFX;
     static const QUrl PATH_TO_POINT_SFX;
-    static const QUrl PATH_TO_SWOOSHING_SFX;
     static const QUrl PATH_TO_WING_SFX;
 
 };

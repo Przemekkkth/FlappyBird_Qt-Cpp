@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QElapsedTimer>
 #include <QGraphicsPixmapItem>
+#include <QSoundEffect>
 
 #include "../game.h"
 class Bird;
@@ -21,6 +22,7 @@ signals:
 private:
     //Pixmap
     void loadPixmap();
+    void loadSFX();
     QPixmap m_bgPixmap, m_basePixmap;
 
     QGraphicsPixmapItem *m_bgPixmapItem, *m_basePixmapItem;
@@ -32,6 +34,8 @@ private:
     //
     QGraphicsSimpleTextItem* m_scoreTextItem;
     QFont m_font;
+    //
+    QSoundEffect m_dieSFX, m_pointSFX, m_wingSFX;
 private slots:
     void activeGameOver();
     void spawnPillar();

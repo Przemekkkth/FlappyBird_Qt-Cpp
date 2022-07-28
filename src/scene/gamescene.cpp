@@ -13,6 +13,7 @@ GameScene::GameScene(QObject *parent)
     setSceneRect(0,0, Game::RESOLUTION.width(), Game::RESOLUTION.height());
 
     loadPixmap();
+    loadSFX();
 
     connect(&m_pillarTimer, &QTimer::timeout, this, &GameScene::spawnPillar);
 
@@ -42,6 +43,13 @@ void GameScene::loadPixmap()
         qDebug() << "Base pixmap is NOT loaded successfully";
     }
 
+}
+
+void GameScene::loadSFX()
+{
+    m_dieSFX.setSource(Game::PATH_TO_HIT_SFX);
+    m_pointSFX.setSource(Game::PATH_TO_POINT_SFX);
+    m_wingSFX.setSource(Game::PATH_TO_WING_SFX);
 }
 
 void GameScene::init()
@@ -77,6 +85,7 @@ void GameScene::init()
 
 void GameScene::activeGameOver()
 {
+    m_dieSFX.play();
     clear();
     m_pillarTimer.stop();
     emit gameOverActivated();
@@ -86,9 +95,11 @@ void GameScene::spawnPillar()
 {
     Pillar * pillarItem = new Pillar();
     connect(pillarItem, &Pillar::collidedWithBird, this, &GameScene::activeGameOver);
+
     connect(pillarItem, &Pillar::scoreChanged, [this](){
-       Game::SCORE++;
-       m_scoreTextItem->setText(QString::number(Game::SCORE).left(Game::SCORE_TEXT_WIDTH));
+        Game::SCORE++;
+        m_scoreTextItem->setText(QString::number(Game::SCORE).left(Game::SCORE_TEXT_WIDTH));
+        m_pointSFX.play();
     });
     addItem(pillarItem);
 }
@@ -97,8 +108,8 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 {
 
     switch (event->key()) {
-        case Qt::Key_L:
-            init();
+    case Qt::Key_Space:
+        m_wingSFX.play();
         break;
     }
     QGraphicsScene::keyPressEvent(event);
@@ -106,6 +117,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 
 void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    m_wingSFX.play();
     m_bird->jump();
     QGraphicsScene::mousePressEvent(event);
 }

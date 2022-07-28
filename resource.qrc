@@ -8,9 +8,7 @@
         <file>res/sprite/background-day.png</file>
         <file>res/sfx/sfx_wing.wav</file>
         <file>res/sfx/sfx_hit.wav</file>
-        <file>res/sfx/sfx_die.wav</file>
         <file>res/sfx/sfx_point.wav</file>
-        <file>res/sfx/sfx_swooshing.wav</file>
         <file>res/font/04B_19.ttf</file>
         <file>res/sprite/gameOver_bg.png</file>
     </qresource>
