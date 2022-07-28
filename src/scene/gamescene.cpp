@@ -1,21 +1,24 @@
 #include "gamescene.h"
 #include <QDebug>
 #include <QKeyEvent>
+#include <QFontDatabase>
+#include <QGraphicsSimpleTextItem>
+
 #include "../entity/bird.h"
 #include "../entity/pillar.h"
 
 GameScene::GameScene(QObject *parent)
-    : QGraphicsScene{parent}, m_deltaTime(0.0f), m_loopTime(0.0f)
-    , m_loopSpeed(int(1.0f/float(Game::FPS))), m_birdMovement(0.0f), m_yPos(Game::RESOLUTION.height()/2)
+    : QGraphicsScene{parent}, m_yPos(Game::RESOLUTION.height()/2)
 {
     setSceneRect(0,0, Game::RESOLUTION.width(), Game::RESOLUTION.height());
-
-    m_timer.start(int(m_loopSpeed));
-    m_elapsedTimer.start();
 
     loadPixmap();
 
     connect(&m_pillarTimer, &QTimer::timeout, this, &GameScene::spawnPillar);
+
+    int id = QFontDatabase::addApplicationFont(Game::PATH_TO_FONT);
+    QString fontFamilyName = QFontDatabase::applicationFontFamilies(id).at(0);
+    m_font = QFont(fontFamilyName, Game::FONT_SIZE, 50);
 }
 
 
@@ -61,6 +64,15 @@ void GameScene::init()
 
     m_pillarTimer.start(1000);
 
+    Game::SCORE = 0;
+    m_scoreTextItem = new QGraphicsSimpleTextItem(QString::number(Game::SCORE).left(Game::SCORE_TEXT_WIDTH));
+    m_scoreTextItem->setFont(m_font);
+    m_scoreTextItem->setPen(QPen(Game::FONT_COLOR));
+    m_scoreTextItem->setBrush(QBrush(Game::FONT_COLOR));
+
+    m_scoreTextItem->setPos(Game::RESOLUTION.width()/2 - m_scoreTextItem->boundingRect().width()/2, Game::FONT_SIZE);
+    m_scoreTextItem->setZValue(1);
+    addItem(m_scoreTextItem);
 }
 
 void GameScene::activeGameOver()
@@ -74,6 +86,10 @@ void GameScene::spawnPillar()
 {
     Pillar * pillarItem = new Pillar();
     connect(pillarItem, &Pillar::collidedWithBird, this, &GameScene::activeGameOver);
+    connect(pillarItem, &Pillar::scoreChanged, [this](){
+       Game::SCORE++;
+       m_scoreTextItem->setText(QString::number(Game::SCORE).left(Game::SCORE_TEXT_WIDTH));
+    });
     addItem(pillarItem);
 }
 

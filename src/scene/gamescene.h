@@ -8,6 +8,7 @@
 
 #include "../game.h"
 class Bird;
+class QGraphicsSimpleTextItem;
 class GameScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -18,23 +19,19 @@ public:
 signals:
     void gameOverActivated();
 private:
-    //FPS
-    float m_deltaTime, m_loopTime;
-    const float m_loopSpeed;
-    QElapsedTimer m_elapsedTimer;
-    QTimer m_timer;
     //Pixmap
     void loadPixmap();
     QPixmap m_bgPixmap, m_basePixmap;
 
     QGraphicsPixmapItem *m_bgPixmapItem, *m_basePixmapItem;
     Bird* m_bird;
-    float m_birdMovement;
     float m_yPos;
     bool m_dir;
     //Pillar
     QTimer m_pillarTimer;
-    // QGraphicsScene interface
+    //
+    QGraphicsSimpleTextItem* m_scoreTextItem;
+    QFont m_font;
 private slots:
     void activeGameOver();
     void spawnPillar();

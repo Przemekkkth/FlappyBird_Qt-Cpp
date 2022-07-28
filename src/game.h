@@ -3,6 +3,7 @@
 #include <QSize>
 #include <QString>
 #include <QPoint>
+#include <QColor>
 
 class Game
 {
@@ -13,6 +14,7 @@ public:
     static bool GAME_ACTIVE;
     static unsigned int SCORE;
     static unsigned int HIGH_SCORE;
+    static constexpr QColor WHITE = QColor(255, 255, 255);
 
     static const QString PATH_TO_BG_PIXMAP;
     static const QString PATH_TO_BASE_PIXMAP;
@@ -20,6 +22,10 @@ public:
     static const QString PATH_TO_PILLAR_PIXMAP;
     static const QString PATH_TO_TITLE_PIXMAP;
     static const QString PATH_TO_GAME_OVER_PIXMAP;
+    static const QString PATH_TO_FONT;
+    static constexpr int FONT_SIZE = 20;
+    static constexpr QColor FONT_COLOR = WHITE;
+    static constexpr int SCORE_TEXT_WIDTH = 4;
 
     static constexpr int FPS = 60;
     static constexpr int GAP_SIZE = 100;

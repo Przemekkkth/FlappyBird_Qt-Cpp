@@ -10,6 +10,8 @@ const QString Game::PATH_TO_PILLAR_PIXMAP = ":/res/sprite/pipe-red.png";
 const QString Game::PATH_TO_TITLE_PIXMAP = ":/res/sprite/message.png";
 const QString Game::PATH_TO_GAME_OVER_PIXMAP = ":/res/sprite/gameOver_bg.png";
 
+const QString Game::PATH_TO_FONT = ":/res/font/04B_19.ttf";
+
 Game::Game()
 {
 
