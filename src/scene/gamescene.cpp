@@ -101,6 +101,11 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             init();
         break;
     }
-    qDebug() << "GameScene::keyPressEvent(QKeyEvent *event)";
     QGraphicsScene::keyPressEvent(event);
+}
+
+void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    m_bird->jump();
+    QGraphicsScene::mousePressEvent(event);
 }

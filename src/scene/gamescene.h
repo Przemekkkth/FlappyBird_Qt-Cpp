@@ -37,6 +37,7 @@ private slots:
     void spawnPillar();
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 };
 
 #endif // GAMESCENE_H

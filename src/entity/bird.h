@@ -19,6 +19,7 @@ public:
 
     qreal rotation() const;
     qreal y() const;
+    void jump();
 public slots:
     void setRotation(qreal rotation);
     void setY(qreal y);
@@ -31,7 +32,7 @@ private slots:
     void updatePixmap();
 
 private:
-    void jump();
+
     void rotateTo(const qreal& end, const int& duration, const QEasingCurve& curve);
     void fall();
 

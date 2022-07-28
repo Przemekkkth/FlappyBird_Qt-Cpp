@@ -31,7 +31,6 @@ Pillar::Pillar()
     m_xAnimation->setDuration(Game::DURATION_OF_PILLAR_ANIMATION);
 
     connect(m_xAnimation,&QPropertyAnimation::finished,[=](){
-        qDebug() << "Animation finished";
         scene()->removeItem(this);
         delete this;
     });

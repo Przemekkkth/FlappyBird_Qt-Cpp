@@ -36,6 +36,5 @@ void View::keyPressEvent(QKeyEvent *event)
             QApplication::instance()->quit();
         break;
     }
-    qDebug() << "View::keyPressEvent";
     QGraphicsView::keyPressEvent(event);
 }
