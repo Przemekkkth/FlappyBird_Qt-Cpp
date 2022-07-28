@@ -1,6 +1,9 @@
 #include "titlescene.h"
 #include "../game.h"
 #include <QGraphicsPixmapItem>
+#include <QGraphicsSimpleTextItem>
+#include <QFontDatabase>
+
 TitleScene::TitleScene(QObject *parent)
     : QGraphicsScene{parent}
 {
@@ -16,6 +19,18 @@ void TitleScene::init()
 
     QGraphicsPixmapItem *titleItem = new QGraphicsPixmapItem(m_titlePixmap.scaled(Game::RESOLUTION.width(), Game::RESOLUTION.height()));
     addItem(titleItem);
+
+    int id = QFontDatabase::addApplicationFont(Game::PATH_TO_FONT);
+    QString fontFamilyName = QFontDatabase::applicationFontFamilies(id).at(0);
+    QFont _font = QFont(fontFamilyName, Game::FONT_SIZE, 50);
+    QGraphicsSimpleTextItem *textItem = new QGraphicsSimpleTextItem();
+    textItem->setFont(_font);
+    textItem->setText("   Press any \nkey or button...");
+    textItem->setPen(QPen(Game::FONT_COLOR));
+    textItem->setBrush(QBrush(Game::FONT_COLOR));
+    textItem->setPos((Game::RESOLUTION.width() - textItem->boundingRect().width())/2, 125);
+    addItem(textItem);
+
 }
 
 void TitleScene::keyPressEvent(QKeyEvent *event)
