@@ -3,7 +3,8 @@
 #include <QApplication>
 
 View::View()
-    : QGraphicsView(), m_gameScene(new GameScene(this)), m_titleScene(new TitleScene(this))
+    : QGraphicsView(), m_gameScene(new GameScene(this)), m_titleScene(new TitleScene(this)),
+      m_gameOverScene(new GameOverScene(this))
 {
     setScene(m_titleScene);
     resize(Game::RESOLUTION.width()+2, Game::RESOLUTION.height()+2);
@@ -18,6 +19,13 @@ void View::createConnections()
     connect(m_titleScene, &TitleScene::gameActivated, [this](){
         setScene(m_gameScene);
         m_gameScene->init();
+    });
+    connect(m_gameOverScene, &GameOverScene::gameActivated, [this](){
+        setScene(m_gameScene);
+        m_gameScene->init();
+    });
+    connect(m_gameScene, &GameScene::gameOverActivated, [this](){
+        setScene(m_gameOverScene);
     });
 }
 

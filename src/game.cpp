@@ -8,6 +8,7 @@ const QString Game::PATH_TO_BASE_PIXMAP = ":/res/sprite/base.png";
 const QString Game::PATH_TO_BIRD_PIXMAP = ":/res/sprite/bird.png";
 const QString Game::PATH_TO_PILLAR_PIXMAP = ":/res/sprite/pipe-red.png";
 const QString Game::PATH_TO_TITLE_PIXMAP = ":/res/sprite/message.png";
+const QString Game::PATH_TO_GAME_OVER_PIXMAP = ":/res/sprite/gameOver_bg.png";
 
 Game::Game()
 {

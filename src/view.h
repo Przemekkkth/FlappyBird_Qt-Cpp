@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include "scene/gamescene.h"
 #include "scene/titlescene.h"
+#include "scene/gameoverscene.h"
 
 class View : public QGraphicsView
 {
@@ -17,6 +18,7 @@ private:
     void createConnections();
     GameScene* m_gameScene;
     TitleScene* m_titleScene;
+    GameOverScene* m_gameOverScene;
     // QWidget interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;

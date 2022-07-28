@@ -67,6 +67,7 @@ void GameScene::activeGameOver()
 {
     clear();
     m_pillarTimer.stop();
+    emit gameOverActivated();
 }
 
 void GameScene::spawnPillar()

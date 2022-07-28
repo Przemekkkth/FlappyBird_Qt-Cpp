@@ -12,5 +12,6 @@
         <file>res/sfx/sfx_point.wav</file>
         <file>res/sfx/sfx_swooshing.wav</file>
         <file>res/font/04B_19.ttf</file>
+        <file>res/sprite/gameOver_bg.png</file>
     </qresource>
 </RCC>

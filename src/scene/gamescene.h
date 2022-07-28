@@ -16,7 +16,7 @@ public:
     //Scene
     void init();
 signals:
-
+    void gameOverActivated();
 private:
     //FPS
     float m_deltaTime, m_loopTime;

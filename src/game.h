@@ -19,6 +19,7 @@ public:
     static const QString PATH_TO_BIRD_PIXMAP;
     static const QString PATH_TO_PILLAR_PIXMAP;
     static const QString PATH_TO_TITLE_PIXMAP;
+    static const QString PATH_TO_GAME_OVER_PIXMAP;
 
     static constexpr int FPS = 60;
     static constexpr int GAP_SIZE = 100;
