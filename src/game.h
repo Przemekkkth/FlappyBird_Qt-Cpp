@@ -4,6 +4,7 @@
 #include <QString>
 #include <QPoint>
 #include <QColor>
+#include <QUrl>
 
 class Game
 {
@@ -33,6 +34,13 @@ public:
     static constexpr int GAP_SIZE = 100;
     static constexpr QPoint RANGE_OF_Y_FOR_PILLARS = QPoint(-125, 25);
     static constexpr int DURATION_OF_PILLAR_ANIMATION = 1500;
+
+    //Sounds
+    static const QUrl PATH_TO_DIE_SFX;
+    static const QUrl PATH_TO_HIT_SFX;
+    static const QUrl PATH_TO_POINT_SFX;
+    static const QUrl PATH_TO_SWOOSHING_SFX;
+    static const QUrl PATH_TO_WING_SFX;
 
 };
 

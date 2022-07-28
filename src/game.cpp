@@ -15,6 +15,12 @@ const QString Game::PATH_TO_GAME_OVER_PIXMAP = ":/res/sprite/gameOver_bg.png";
 
 const QString Game::PATH_TO_FONT = ":/res/font/04B_19.ttf";
 
+const QUrl Game::PATH_TO_DIE_SFX = QUrl("qrc:/res/sfx/sfx_die.wav");
+const QUrl Game::PATH_TO_HIT_SFX = QUrl("qrc:/res/sfx/sfx_hit.wav");;
+const QUrl Game::PATH_TO_POINT_SFX = QUrl("qrc:/res/sfx/sfx_point.wav");;
+const QUrl Game::PATH_TO_SWOOSHING_SFX = QUrl("qrc:/res/sfx/sfx_swooshing.wav");
+const QUrl Game::PATH_TO_WING_SFX = QUrl("qrc:/res/sfx/sfx_wing.wav");;
+
 Game::Game()
 {
 
