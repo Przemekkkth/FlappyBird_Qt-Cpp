@@ -25,6 +25,7 @@ void View::createConnections()
         m_gameScene->init();
     });
     connect(m_gameScene, &GameScene::gameOverActivated, [this](){
+        m_gameOverScene->updateScore();
         setScene(m_gameOverScene);
     });
 }

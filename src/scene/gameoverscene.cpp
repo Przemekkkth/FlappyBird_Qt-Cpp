@@ -16,7 +16,12 @@ GameOverScene::GameOverScene(QObject *parent)
 
 void GameOverScene::updateScore()
 {
-
+    if(Game::SCORE > Game::HIGH_SCORE)
+    {
+        Game::HIGH_SCORE = Game::SCORE;
+    }
+    m_scoreTextItem->setText("Your score: " + QString::number(Game::SCORE).left(Game::SCORE_TEXT_WIDTH));
+    m_highScoreTextItem->setText("Record: " + QString::number(Game::HIGH_SCORE).left(Game::SCORE_TEXT_WIDTH));
 }
 
 void GameOverScene::keyPressEvent(QKeyEvent *event)
@@ -73,7 +78,7 @@ void GameOverScene::init()
 
     m_highScoreTextItem = new QGraphicsSimpleTextItem();
     m_highScoreTextItem->setFont(_font);
-    m_highScoreTextItem->setText("Record: " + QString::number(Game::SCORE).left(Game::SCORE_TEXT_WIDTH));
+    m_highScoreTextItem->setText("Record: " + QString::number(Game::HIGH_SCORE).left(Game::SCORE_TEXT_WIDTH));
     m_highScoreTextItem->setPen(QPen(Game::FONT_COLOR));
     m_highScoreTextItem->setBrush(QBrush(Game::FONT_COLOR));
     m_highScoreTextItem->setPos((Game::RESOLUTION.width() - m_highScoreTextItem->boundingRect().width())/2, 250);
