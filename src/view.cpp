@@ -3,12 +3,22 @@
 #include <QApplication>
 
 View::View()
-    : QGraphicsView(), m_gameScene(new GameScene())
+    : QGraphicsView(), m_gameScene(new GameScene(this)), m_titleScene(new TitleScene(this))
 {
-    setScene(m_gameScene);
+    setScene(m_titleScene);
     resize(Game::RESOLUTION.width()+2, Game::RESOLUTION.height()+2);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    createConnections();
+}
+
+void View::createConnections()
+{
+    connect(m_titleScene, &TitleScene::gameActivated, [this](){
+        setScene(m_gameScene);
+        m_gameScene->init();
+    });
 }
 
 void View::keyPressEvent(QKeyEvent *event)

@@ -7,6 +7,7 @@ SOURCES += \
     src/game.cpp \
     src/scene/gamescene.cpp \
     src/main.cpp \
+    src/scene/titlescene.cpp \
     src/view.cpp
 
 HEADERS += \
@@ -14,6 +15,7 @@ HEADERS += \
     src/entity/pillar.h \
     src/game.h \
     src/scene/gamescene.h \
+    src/scene/titlescene.h \
     src/view.h
 
 RESOURCES += \

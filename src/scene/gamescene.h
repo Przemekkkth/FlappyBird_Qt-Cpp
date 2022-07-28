@@ -13,7 +13,8 @@ class GameScene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit GameScene(QObject *parent = nullptr);
-
+    //Scene
+    void init();
 signals:
 
 private:
@@ -25,8 +26,6 @@ private:
     //Pixmap
     void loadPixmap();
     QPixmap m_bgPixmap, m_basePixmap;
-    //Scene
-    void init();
 
     QGraphicsPixmapItem *m_bgPixmapItem, *m_basePixmapItem;
     Bird* m_bird;

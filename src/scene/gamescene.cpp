@@ -14,8 +14,6 @@ GameScene::GameScene(QObject *parent)
     m_elapsedTimer.start();
 
     loadPixmap();
-    init();
-
 
     connect(&m_pillarTimer, &QTimer::timeout, this, &GameScene::spawnPillar);
 }
