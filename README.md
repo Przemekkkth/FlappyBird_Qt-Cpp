@@ -17,5 +17,6 @@ Compile
 qmake && make
 ```
 
-## Adons
+## Addons
 * [Qt] (https://www.qt.io/) - Cross-Platform software for embedded & desktop
+* [Yt] (https://youtu.be/od_x6_kC9o0) - gameplay
