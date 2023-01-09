@@ -11,7 +11,7 @@ GameScene::GameScene(QObject *parent)
     : QGraphicsScene{parent}, m_yPos(Game::RESOLUTION.height()/2)
 {
     setSceneRect(0,0, Game::RESOLUTION.width(), Game::RESOLUTION.height());
-
+    setBackgroundBrush(QBrush(Qt::white));
     loadPixmap();
     loadSFX();
 
@@ -81,6 +81,38 @@ void GameScene::init()
     m_scoreTextItem->setPos(Game::RESOLUTION.width()/2 - m_scoreTextItem->boundingRect().width()/2, Game::FONT_SIZE);
     m_scoreTextItem->setZValue(1);
     addItem(m_scoreTextItem);
+
+    QGraphicsRectItem* lItem = new QGraphicsRectItem();
+    lItem->setPen(backgroundBrush().color());
+    lItem->setBrush(backgroundBrush().color());
+    lItem->setRect(0,0,Game::RESOLUTION.width(), 2*Game::RESOLUTION.height());
+    lItem->setPos(-Game::RESOLUTION.width()-2, -Game::RESOLUTION.height()/2);
+    lItem->setZValue(1000);
+    addItem(lItem);
+
+    QGraphicsRectItem* rItem = new QGraphicsRectItem();
+    rItem->setPen(backgroundBrush().color());
+    rItem->setBrush(backgroundBrush().color());
+    rItem->setRect(0,0,Game::RESOLUTION.width(), 2*Game::RESOLUTION.height());
+    rItem->setPos(+Game::RESOLUTION.width()+2, -Game::RESOLUTION.height()/2);
+    rItem->setZValue(1000);
+    addItem(rItem);
+
+    QGraphicsRectItem* tItem = new QGraphicsRectItem();
+    tItem->setPen(backgroundBrush().color());
+    tItem->setBrush(backgroundBrush().color());
+    tItem->setRect(0,0,Game::RESOLUTION.width()+4, Game::RESOLUTION.height()/2);
+    tItem->setPos(-2, -Game::RESOLUTION.height()/2-1);
+    tItem->setZValue(1000);
+    addItem(tItem);
+
+    QGraphicsRectItem* bItem = new QGraphicsRectItem();
+    bItem->setPen(backgroundBrush().color());
+    bItem->setBrush(backgroundBrush().color());
+    bItem->setRect(0,0,Game::RESOLUTION.width()+4, Game::RESOLUTION.height()/2);
+    bItem->setPos(-2, Game::RESOLUTION.height());
+    bItem->setZValue(1000);
+    addItem(bItem);
 }
 
 void GameScene::activeGameOver()
