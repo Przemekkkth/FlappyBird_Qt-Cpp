@@ -20,4 +20,4 @@ qmake && make
 ## Addons
 * [Qt](https://www.qt.io/) - Cross-Platform software for embedded & desktop
 * [yt](https://youtu.be/od_x6_kC9o0) - gameplay
-* [Play online](https://przemekkkth.github.io/flappybird/index.html) - game hosted on GitHub.
+* [Play online](https://przemekkkth.github.io/assets/games/flappybird/index.html) - game hosted on GitHub.
